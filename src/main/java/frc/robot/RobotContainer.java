@@ -21,11 +21,15 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
+  private WPI_TalonSRX motor1;
+  private WPI_TalonSRX motor2;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    motor1 = new WPI_TalonSRX(Constants.CAN.FLYWHEEL_TALON1);
+    motor2 = new WPI_TalonSRX(Constants.CAN.FLYWHEEL_TALON2);
   }
 
   /**
