@@ -7,14 +7,14 @@ package frc.robot.Subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class Flywheel extends SubsystemBase {
   /** Creates a new Flywheel. */
-  private WPI_TalonFX frontMotor;
-  private WPI_TalonFX backMotor;
+  private TalonFX frontMotor;
+  private TalonFX backMotor;
 
-  public Flywheel(WPI_TalonFX frontMotor, WPI_TalonFX backMotor) {
+  public Flywheel(TalonFX frontMotor, TalonFX backMotor) {
     this.backMotor = backMotor;
     this.frontMotor = frontMotor;
   }
@@ -25,8 +25,8 @@ public class Flywheel extends SubsystemBase {
   }
 
   public void spinSpeed(double speed) {
-    frontMotor.set(speed);
-    backMotor.set(speed);
+    frontMotor.set(ControlMode.Velocity, speed);
+    backMotor.set(ControlMode.Velocity, speed);
   }
 
   public void spinPower(double power) {

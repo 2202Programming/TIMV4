@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -23,8 +23,8 @@ import frc.robot.commands.SetSpinFlywheel;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  private WPI_TalonFX motor1;
-  private WPI_TalonFX motor2;
+  private TalonFX motor1;
+  private TalonFX motor2;
   private Flywheel m_flywheel;
 
   /**
@@ -34,8 +34,8 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-    motor1 = new WPI_TalonFX(Constants.CAN.FLYWHEEL_TALON1);
-    motor2 = new WPI_TalonFX(Constants.CAN.FLYWHEEL_TALON2);
+    motor1 = new TalonFX(Constants.CAN.FLYWHEEL_TALON1);
+    motor2 = new TalonFX(Constants.CAN.FLYWHEEL_TALON2);
     m_flywheel = new Flywheel(motor1, motor2);
 
     XboxController m_xbox = new XboxController(1);
