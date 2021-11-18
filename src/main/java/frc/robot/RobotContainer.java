@@ -6,12 +6,18 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.PCM;
+import frc.robot.Constants.CAN;
+import frc.robot.commands.Fire;
+import frc.robot.commands.FireThenIdle;
 import frc.robot.commands.SetSpinFlywheel;
 import frc.robot.subsystems.Flywheel;
+import frc.robot.subsystems.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -25,7 +31,10 @@ public class RobotContainer {
 
   private TalonFX motor1;
   private TalonFX motor2;
+  private DoubleSolenoid solenoid;
+
   private Flywheel m_flywheel;
+  private Trigger m_trigger;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -36,10 +45,18 @@ public class RobotContainer {
 
     motor1 = new TalonFX(Constants.CAN.FLYWHEEL_TALON1);
     motor2 = new TalonFX(Constants.CAN.FLYWHEEL_TALON2);
+    solenoid = new DoubleSolenoid(CAN.PCM, PCM.TRIGGER_FORWARD, PCM.TRIGGER_BACK);
+
     m_flywheel = new Flywheel(motor1, motor2);
+    m_trigger = new Trigger(solenoid);
 
     XboxController m_xbox = new XboxController(1);
-    new JoystickButton(m_xbox, 3).whenPressed(new SetSpinFlywheel(m_flywheel)); // x = 3
+    new JoystickButton(m_xbox, 3).whenPressed(new SetSpinFlywheel(m_flywheel, 0.2)); // x = 3
+    new JoystickButton(m_xbox, 4).whenPressed(new SetSpinFlywheel(m_flywheel, 0)); // y = 4
+
+    new JoystickButton(m_xbox, 1).whenPressed(new FireThenIdle(m_trigger, m_flywheel)); // a =
+    // 4
+
   }
 
   /**

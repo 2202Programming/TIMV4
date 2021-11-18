@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -32,6 +33,14 @@ public class Flywheel extends SubsystemBase {
   public void spinPower(double power) {
     frontMotor.set(ControlMode.PercentOutput, power);
     backMotor.set(ControlMode.PercentOutput, power);
+  }
+
+  public boolean upToSpeed() {
+    if ((frontMotor.getSensorCollection().getIntegratedSensorVelocity() >= Constants.SHOOTER.MIN_SHOOTER_SPEED)
+        && (backMotor.getSensorCollection().getIntegratedSensorVelocity() >= Constants.SHOOTER.MIN_SHOOTER_SPEED)) {
+      return true;
+    }
+    return false;
   }
 
 }

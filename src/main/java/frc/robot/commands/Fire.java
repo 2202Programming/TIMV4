@@ -7,27 +7,26 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Flywheel;
+import frc.robot.subsystems.Trigger;
 
-public class SetSpinFlywheel extends CommandBase {
+public class Fire extends CommandBase {
   /**
-   * Creates a new SetSpinFlywheel.
+   * Creates a new Fire.
    */
-  private Flywheel m_flywheel;
-  private double speed;
+  private Trigger trigger;
+  private Flywheel flywheel;
 
-  public SetSpinFlywheel(Flywheel flywheel, double speed) {
-    m_flywheel = flywheel;
-    this.speed = speed;
+  public Fire(Trigger trigger, Flywheel flywheel) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.trigger = trigger;
+    this.flywheel = flywheel;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_flywheel.spinSpeed(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,11 +37,15 @@ public class SetSpinFlywheel extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    trigger.fire();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (flywheel.upToSpeed()) {
+      return true;
+    }
     return false;
   }
 }

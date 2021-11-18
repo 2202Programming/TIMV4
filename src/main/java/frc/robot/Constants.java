@@ -16,9 +16,21 @@ package frc.robot;
  */
 public final class Constants {
 
+    public static final class SHOOTER {
+        public static final double MIN_SHOOTER_SPEED = 200; // One unit represents one position unit per 100ms
+    }
+
     public static final class CAN {
         public static final int FLYWHEEL_TALON1 = 0;
-        public static final int FLYWHEEL_TALON2 = 0;
+        public static final int FLYWHEEL_TALON2 = 2;
 
+        public static final int PCM = 0;
+
+    }
+
+    // pneumatics control
+    public static final class PCM {
+        public static final int TRIGGER_FORWARD = 0;
+        public static final int TRIGGER_BACK = 2;
     }
 }
