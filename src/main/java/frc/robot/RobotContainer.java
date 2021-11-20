@@ -18,6 +18,9 @@ import frc.robot.commands.FireThenIdle;
 import frc.robot.commands.SetSpinFlywheel;
 import frc.robot.subsystems.Flywheel;
 import frc.robot.subsystems.Trigger;
+import frc.robot.utils.hid.DriverControls;
+import frc.robot.utils.hid.XboxButton;
+import frc.robot.utils.hid.DriverControls.Id;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -36,6 +39,8 @@ public class RobotContainer {
   private Flywheel m_flywheel;
   private Trigger m_trigger;
 
+  private DriverControls dc = new DriverControls();
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -49,14 +54,6 @@ public class RobotContainer {
 
     m_flywheel = new Flywheel(motor1, motor2);
     m_trigger = new Trigger(solenoid);
-
-    XboxController m_xbox = new XboxController(1);
-    new JoystickButton(m_xbox, 3).whenPressed(new SetSpinFlywheel(m_flywheel, 0.2)); // x = 3
-    new JoystickButton(m_xbox, 4).whenPressed(new SetSpinFlywheel(m_flywheel, 0)); // y = 4
-
-    new JoystickButton(m_xbox, 1).whenPressed(new FireThenIdle(m_trigger, m_flywheel)); // a =
-    // 4
-
   }
 
   /**
@@ -66,6 +63,13 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    dc.registerController(Id.Driver, new XboxController(1));
+    dc.bind(Id.Driver, XboxButton.A)
+      .whenPressed(new SetSpinFlywheel(m_flywheel, 0.2))
+      .whenReleased(new SetSpinFlywheel(m_flywheel, 0));
+
+    dc.bind(Id.Driver, XboxButton.A)
+      .whenPressed(new FireThenIdle(m_trigger, m_flywheel));
   }
 
   /**
