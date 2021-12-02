@@ -34,6 +34,7 @@ public class RobotContainer {
 
   private TalonFX motor1;
   private TalonFX motor2;
+  public TalonFX actuator;
   private DoubleSolenoid solenoid;
 
   private Flywheel m_flywheel;
@@ -51,6 +52,7 @@ public class RobotContainer {
     motor1 = new TalonFX(Constants.CAN.FLYWHEEL_TALON1);
     motor2 = new TalonFX(Constants.CAN.FLYWHEEL_TALON2);
     solenoid = new DoubleSolenoid(CAN.PCM, PCM.TRIGGER_FORWARD, PCM.TRIGGER_BACK);
+    actuator = new TalonFX(Constants.CAN.ACTUATOR_TALON);
 
     m_flywheel = new Flywheel(motor1, motor2);
     m_trigger = new Trigger(solenoid);
@@ -64,12 +66,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     dc.registerController(Id.Driver, new XboxController(1));
-    dc.bind(Id.Driver, XboxButton.A)
-      .whenPressed(new SetSpinFlywheel(m_flywheel, 0.2))
-      .whenReleased(new SetSpinFlywheel(m_flywheel, 0));
+    dc.bind(Id.Driver, XboxButton.A).whenPressed(new SetSpinFlywheel(m_flywheel, 0.2))
+        .whenReleased(new SetSpinFlywheel(m_flywheel, 0));
 
-    dc.bind(Id.Driver, XboxButton.A)
-      .whenPressed(new FireThenIdle(m_trigger, m_flywheel));
+    dc.bind(Id.Driver, XboxButton.B).whenPressed(new FireThenIdle(m_trigger, m_flywheel));
   }
 
   /**
