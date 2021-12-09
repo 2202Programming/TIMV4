@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Flywheel;
+import frc.robot.utils.Stick;
 
 public class SetSpinFlywheel extends CommandBase {
   /**
@@ -27,6 +28,7 @@ public class SetSpinFlywheel extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Stick.log("Starting SetSpinFlywheel command");
     m_flywheel.spinSpeed(speed);
   }
 

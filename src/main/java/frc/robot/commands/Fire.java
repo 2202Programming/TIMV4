@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Flywheel;
 import frc.robot.subsystems.Trigger;
+import frc.robot.utils.Stick;
 
 public class Fire extends CommandBase {
   /**
@@ -27,6 +28,7 @@ public class Fire extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Stick.log("Starting Fire command");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
