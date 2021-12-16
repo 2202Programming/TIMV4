@@ -9,20 +9,22 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.utils.Stick;
 
 public class Elevation extends SubsystemBase {
   /**
    * Creates a new Elevation.
    */
 
-  public TalonFX actuator;
+  public TalonSRX actuator;
 
-  public Elevation(TalonFX actuator) {
+  public Elevation(TalonSRX actuator) {
     this.actuator = actuator;
+
     // https://github.dev/CrossTheRoadElec/Phoenix-Examples-Languages
 
     // Initialization procedure brought from
@@ -55,6 +57,7 @@ public class Elevation extends SubsystemBase {
     this.actuator.config_kD(Constants.Elevation.kPIDLoopIdx, Constants.Elevation.kGains.kD,
         Constants.Elevation.kTimeoutMs);
 
+    setActuatorAngle(0);
   }
 
   @Override
@@ -63,7 +66,8 @@ public class Elevation extends SubsystemBase {
   }
 
   public void setActuatorAngle(double angle) {
-    actuator.set(ControlMode.Position, angle * angleToPosition(angle));
+    actuator.set(ControlMode.Position, angleToPosition(angle));
+    Stick.log("Running setActuatorAngle angle= " + angle);
   }
 
   public double angleToPosition(double angle) {

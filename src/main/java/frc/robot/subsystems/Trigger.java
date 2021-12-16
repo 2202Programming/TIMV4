@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,14 +20,22 @@ public class Trigger extends SubsystemBase {
   final DoubleSolenoid.Value IDLE = Value.kReverse; // retract
 
   private DoubleSolenoid solenoid;
+  // private Compressor compressor;
 
   public Trigger(DoubleSolenoid solenoid) {
     this.solenoid = solenoid;
+    idle();
+    // compressor = new Compressor(1); // 1 is CAN ID of PCM
+    solenoid.clearAllPCMStickyFaults();
+
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // if (!compressor.enabled()) {
+    // compressor.start();
+    // }
   }
 
   public void fire() {
@@ -36,4 +45,5 @@ public class Trigger extends SubsystemBase {
   public void idle() {
     solenoid.set(IDLE);
   }
+
 }

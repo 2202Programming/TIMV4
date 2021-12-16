@@ -45,9 +45,9 @@ public class Fire extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (flywheel.upToSpeed()) {
-      return true;
-    }
-    return false;
+    // if (flywheel.upToSpeed()) {
+    // return true;
+    // }
+    return true;
   }
 }

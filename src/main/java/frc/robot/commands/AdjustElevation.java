@@ -7,29 +7,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.Flywheel;
-import frc.robot.subsystems.Trigger;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.subsystems.Elevation;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class FireThenIdle extends SequentialCommandGroup {
-  /**
-   * Creates a new FireThenIdle.
-   */
-  public FireThenIdle(Trigger trigger, Flywheel flywheel) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new Fire(trigger, flywheel),
+public class AdjustElevation extends InstantCommand {
 
-        new WaitCommand(0.1),
+  private Elevation m_elevator;
+  private double angle;
 
-        new Idle(trigger),
+  public AdjustElevation(Elevation m_elevator) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.m_elevator = m_elevator;
+    angle = 0;
+  }
 
-        new WaitCommand(1.0)
-
-    );
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {
+    angle = angle + 50;
+    m_elevator.setActuatorAngle(angle);
   }
 }

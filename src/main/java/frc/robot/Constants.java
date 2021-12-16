@@ -57,19 +57,19 @@ public final class Constants {
     }
 
     public static final class CAN {
-        public static final int FLYWHEEL_TALON1 = 0;
-        public static final int FLYWHEEL_TALON2 = 2;
+        public static final int FLYWHEEL_TALON1 = 10;
+        public static final int FLYWHEEL_TALON2 = 11;
 
-        public static final int ACTUATOR_TALON = 1;
+        public static final int ACTUATOR_TALON = 12;
 
-        public static final int PCM = 0;
+        public static final int PCM = 1;
 
     }
 
     // pneumatics control
     public static final class PCM {
         public static final int TRIGGER_FORWARD = 0;
-        public static final int TRIGGER_BACK = 2;
+        public static final int TRIGGER_BACK = 1;
     }
 
 }

@@ -13,9 +13,9 @@ package frc.robot.utils;
 public class Stick {
 
     public static void log(String message) {
-        StackTraceElement lastMethod = Thread.currentThread().getStackTrace()[2];
-        String packageName = getPackageName(lastMethod);
-        System.out.print(message + " Method: " + lastMethod + " Package:" + packageName);
+        // StackTraceElement lastMethod = Thread.currentThread().getStackTrace()[2];
+        // String packageName = getPackageName(lastMethod);
+        System.out.print("[Stick]: " + message + "\n");
     }
 
     /**
